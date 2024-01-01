@@ -4,7 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BillingsModule } from './billings/billings.module';
 import { MailModule } from './mail/mail.module';
+import { UsersModule } from './users/users.module';
+import { AccountModule } from './account/account.module';
+import { ProductsModule } from './products/products.module';
+import { LabelsModule } from './labels/labels.module';
 
 @Module({
   imports: [
@@ -24,6 +29,11 @@ import { MailModule } from './mail/mail.module';
       }),
     }),
     MailModule,
+    UsersModule,
+    BillingsModule,
+    AccountModule,
+    ProductsModule,
+    LabelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

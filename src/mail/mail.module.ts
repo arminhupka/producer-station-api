@@ -22,7 +22,9 @@ import { MailService } from './mail.service';
           },
         },
         defaults: {
-          from: '"No Reply" <noreply@example.com>',
+          from: `${config.get<string>('EMAIL_FROM_NAME')} <${config.get<string>(
+            'EMAIL_FROM_ADDRESS',
+          )}>`,
         },
         template: {
           dir: join(__dirname, 'templates'),
