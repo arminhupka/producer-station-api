@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { UsersService } from '../users/users.service';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
 import { LabelsService } from './labels.service';
 
+@ApiTags('Labels')
 @Controller('labels')
 export class LabelsController {
   constructor(
@@ -12,6 +14,7 @@ export class LabelsController {
     private readonly usersService: UsersService,
   ) {}
 
+  @ApiOperation({ summary: 'Creating new label' })
   @Post('/')
   async create(@Body() { name }: CreateLabelDto) {
     const user = await this.usersService.findById(
@@ -20,11 +23,13 @@ export class LabelsController {
     return this.labelsService.create(user, name);
   }
 
+  @ApiOperation({ summary: 'Updating label' })
   @Patch('/:id')
   update(@Param('id') id: string, @Body() dto: UpdateLabelDto) {
     return this.labelsService.update(id, dto);
   }
 
+  @ApiOperation({ summary: 'Deleting label' })
   @Delete('/:id')
   delete(@Param('id') id: string) {
     return this.labelsService.delete(id);
